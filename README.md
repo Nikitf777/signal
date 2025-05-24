@@ -1,5 +1,9 @@
 # signal
 
+**signal** --- is a simple and lightweight C++20 library that brings Godot-like awaitable signals to native C++.
+
+It only depends on my another lightweight library [delegate](https://github.com/Nikitf777/delegate), that provides a reusable wrapper for a collection of callables.
+
 ### Usage
 ```C++
 #include <iostream>
@@ -7,7 +11,7 @@
 #include <chrono>
 
 #include "signal.hpp"
-#include "task.hpp"
+#include "task.hpp" // only needed when you want to await a signal
 
 struct MyClass {
     void Print(int x) {
@@ -24,6 +28,7 @@ int main() {
 
     MyClass obj;
 
+	// Connect callables
     mySignal.Connect(std::bind(&MyClass::Print, &obj, std::placeholders::_1));
     mySignal.Connect([](int x) { std::cout << "Lambda(" << x << ")\n"; });
     mySignal.Connect(FreeFunction);
@@ -44,6 +49,7 @@ int main() {
         }
     }();
 
+	 // start awaiting
     task1.resume();
     task2.resume();
 
