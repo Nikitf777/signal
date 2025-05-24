@@ -1,9 +1,6 @@
 cmake_minimum_required(VERSION 3.14)
 project(signal VERSION 1.0 LANGUAGES CXX)
 
-# Include delegate as a subdirectory
-# add_subdirectory(delegate)
-
 include(FetchContent)
 
 # Fetch delegate
@@ -12,20 +9,13 @@ FetchContent_Declare(
 	GIT_REPOSITORY https://github.com/nikitf777/delegate.git
 	GIT_TAG v1.0.4
 )
-FetchContent_Declare(
-	cppcoro
-	GIT_REPOSITORY https://github.com/andreasbuhr/cppcoro.git
-	GIT_TAG 6c9c0cea4a54d427e9ca7153f27baaae19039439
-)
 
 FetchContent_MakeAvailable(delegate)
-FetchContent_MakeAvailable(cppcoro)
 
 # Create the header-only library interface
 add_library(${PROJECT_NAME} INTERFACE)
 
 target_link_libraries(${PROJECT_NAME} INTERFACE delegate)
-target_link_libraries(${PROJECT_NAME} INTERFACE cppcoro)
 
 target_compile_features(${PROJECT_NAME} INTERFACE cxx_std_20)
 
