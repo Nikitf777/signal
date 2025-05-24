@@ -11,11 +11,11 @@ template <typename Ret, typename... Args> class Signal<Ret(Args...)> {
   public:
 	using Signature = Ret(Args...);
 
-	template <typename F> void Connect(F &&f) {
+	template <typename F> void connect(F &&f) {
 		m_delegate += std::forward<F>(f);
 	}
 
-	template <typename... CallArgs> void Emit(CallArgs &&...args) {
+	template <typename... CallArgs> void emit(CallArgs &&...args) {
 		m_delegate(std::forward<CallArgs>(args)...);
 
 		if constexpr (sizeof...(Args)) {
@@ -45,7 +45,7 @@ template <typename Ret, typename... Args> class Signal<Ret(Args...)> {
 	}
 
 	template <typename... CallArgs> void operator()(CallArgs &&...args) {
-		Emit(std::forward<CallArgs>(args)...);
+		emit(std::forward<CallArgs>(args)...);
 	}
 
 	// Awaiter

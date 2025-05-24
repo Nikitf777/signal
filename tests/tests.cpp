@@ -31,9 +31,9 @@ TEST_F(SignalTest, AllHandlersAreInvoked) {
     MockClass mock;
 
     // Connect handlers
-    signal.Connect(std::bind(&MockClass::Print, &mock, std::placeholders::_1));
-    signal.Connect([this](int x) { lambda_call_count++; });
-    signal.Connect([this](int x) { free_func_call_count++; });
+    signal.connect(std::bind(&MockClass::Print, &mock, std::placeholders::_1));
+    signal.connect([this](int x) { lambda_call_count++; });
+    signal.connect([this](int x) { free_func_call_count++; });
 
     // Expectations
     EXPECT_CALL(mock, Print(42)).Times(1);
@@ -51,9 +51,9 @@ TEST_F(SignalTest, HandlersAreInvokedMultipleTimes) {
     Signal<void(int)> signal;
     MockClass mock;
 
-    signal.Connect(std::bind(&MockClass::Print, &mock, std::placeholders::_1));
-    signal.Connect([this](int x) { lambda_call_count++; });
-    signal.Connect([this](int x) { free_func_call_count++; });
+    signal.connect(std::bind(&MockClass::Print, &mock, std::placeholders::_1));
+    signal.connect([this](int x) { lambda_call_count++; });
+    signal.connect([this](int x) { free_func_call_count++; });
 
     // First emission
     EXPECT_CALL(mock, Print(42)).Times(1);
