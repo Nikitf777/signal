@@ -25,6 +25,29 @@ protected:
     int free_func_call_count = 0;
 };
 
+// Test that the signal is compatible with different types
+TEST_F(SignalTest, SignalIsCompatibleWithDifferentTypes) {
+	Signal<void(int)> intSignal;
+	Signal<void(float)> floatSignal;
+	Signal<void(std::string)> stringSignal;
+
+	int intValue{};
+	float floatValue{};
+	std::string stringValue{};
+
+	intSignal.connect([&intValue](int x) { intValue = x; });
+	floatSignal.connect([&floatValue](float x) { floatValue = x; });
+	stringSignal.connect([&stringValue](std::string x) { stringValue = x; });
+
+	intSignal(42);
+	floatSignal(3.14f);
+	stringSignal("Hello, World!");
+
+	EXPECT_EQ(intValue, 42);
+	EXPECT_EQ(floatValue, 3.14f);
+	EXPECT_EQ(stringValue, "Hello, World!");
+}
+
 // Test that all connected handlers are invoked once per signal emission
 TEST_F(SignalTest, AllHandlersAreInvoked) {
     Signal<void(int)> signal;
