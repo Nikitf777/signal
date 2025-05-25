@@ -7,7 +7,7 @@ include(FetchContent)
 FetchContent_Declare(
 	delegate
 	GIT_REPOSITORY https://github.com/nikitf777/delegate.git
-	GIT_TAG v1.0.4
+	GIT_TAG main
 )
 
 FetchContent_MakeAvailable(delegate)
