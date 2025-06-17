@@ -1,6 +1,6 @@
 # signal
 
-**signal** --- is a simple and lightweight C++20 library that brings Godot-like awaitable signals to native C++.
+**signal** — is a simple and lightweight C++20 library that brings Godot-like awaitable signals to native C++.
 
 It only depends on my another lightweight library [delegate](https://github.com/Nikitf777/delegate), that provides a reusable wrapper for a collection of callables.
 
