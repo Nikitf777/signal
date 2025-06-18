@@ -3,7 +3,7 @@
 #include <tuple>
 #include <vector>
 
-#include "delegate.hpp"
+#include "delegate/delegate.hpp"
 
 template <typename Ret, typename... Args> class Signal;
 

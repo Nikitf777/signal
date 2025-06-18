@@ -21,7 +21,7 @@ target_compile_features(${PROJECT_NAME} INTERFACE cxx_std_20)
 
 # Include directories for signal
 target_include_directories(${PROJECT_NAME} INTERFACE
-	$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+	$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>
 	$<INSTALL_INTERFACE:include>
 )
 
@@ -44,8 +44,10 @@ find_package(GTest REQUIRED)
 
 add_executable(${PROJECT_NAME}-tests tests/tests.cpp)
 target_compile_features(${PROJECT_NAME}-tests PRIVATE cxx_std_20)
-target_link_libraries(${PROJECT_NAME}-tests PRIVATE GTest::GTest GTest::Main)
-target_link_libraries(${PROJECT_NAME}-tests PRIVATE gmock)
-target_link_libraries(${PROJECT_NAME}-tests PRIVATE ${PROJECT_NAME})
+target_link_libraries(${PROJECT_NAME}-tests PRIVATE
+	GTest::GTest
+	GTest::Main
+	gmock
+	${PROJECT_NAME})
 
 add_test(NAME tests COMMAND tests)
