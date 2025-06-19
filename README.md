@@ -10,8 +10,8 @@ It only depends on my another lightweight library [delegate](https://github.com/
 #include <iostream>
 #include <thread>
 
-#include "signal.hpp"
-#include "task.hpp" // only needed when you want to await a signal
+#include "signal/signal.hpp"
+#include "signal/task.hpp" // only needed when you want to await a signal
 
 struct MyClass {
 	void Print(int x) { std::cout << "MyClass::Print(" << x << ")\n"; }
